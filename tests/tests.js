@@ -397,5 +397,30 @@ exports.defineManualTests = function(contentEl, createActionButton) {
                     );
                 }, SERVICE);
         });
+
+        createActionButton('Test getting value from other app', function() {
+            ss = new cordova.plugins.SecureStorage(
+                function () {
+                    ss.set(
+                      function(key) {
+                      },
+                      function(error) {
+                      },
+                      "shared_key",
+                      "shared_value"
+                    )
+                    window.plugins.launcher.launch({packageName:'com.crypho.SecureStorageReadSharedValueApp'},
+                        function(data) {
+
+                        },
+                        function(error) {
+                            alert(error);
+                        }
+                    );
+                },
+                function () {
+                    alert('Init failed.');
+                }, SERVICE);
+        });
     }
 };
